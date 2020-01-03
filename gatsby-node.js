@@ -9,33 +9,31 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 	// `File` node here
 
 	if (node.internal.type === 'Mdx') {
+		// default slug will be filename
 		let value = createFilePath({
 			node,
 			getNode,
 		})
+		// in case a custom slug exists in frontmatter
 		if (node.frontmatter.slug) {
 			value = '/' + node.frontmatter.slug
 		}
+		// We create node values for futher operations.
 
-		if (node.frontmatter.type === 'page') {
-			createNodeField({
-				// Name of the field you are adding
-				name: 'slug',
-				// Individual MDX node
-				node,
-				value: `${value}`,
-			})
-		} else {
-			if (node.frontmatter.type === 'article') {
-				createNodeField({
-					// Name of the field you are adding
-					name: 'slug',
-					// Individual MDX node
-					node,
-					value: `/articles${value}`,
-				})
-			}
+		if (!node.frontmatter.type) {
+			// default type,
+			node.frontmatter.type = 'article'
 		}
+		createNodeField({
+			name: 'slug',
+			node,
+			value: `${value}`,
+		})
+		createNodeField({
+			name: 'type',
+			node,
+			value: node.frontmatter.type,
+		})
 	}
 }
 
@@ -50,8 +48,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 						id
 						fields {
 							slug
+							type
 						}
 						frontmatter {
+							slug
 							type
 						}
 					}
@@ -68,17 +68,26 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 	const posts = result.data.allMdx.edges
 	// you'll call `createPage` for each result
 	posts.forEach(({ node }, index) => {
+		let template
+		switch (node.fields.type) {
+			case 'article':
+				template = `./src/templates/posts-page-layout.js`
+				break
+			case 'page':
+				template = `./src/templates/pages-page-layout.js`
+				break
+		}
 		createPage({
 			// This is the slug you created before
-			// (or `node.frontmatter.slug`)
 			path: node.fields.slug,
 			// This component will wrap our MDX content
-			component: path.resolve(
-				`./src/templates/posts-page-layout.js`
-			),
+			component: path.resolve(template),
 			// You can use the values in this context in
 			// our page layout component
-			context: { id: node.id },
+			context: {
+				id: node.id,
+				type: node.fields.type,
+			},
 		})
 	})
 }
