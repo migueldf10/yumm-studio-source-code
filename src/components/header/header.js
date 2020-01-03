@@ -15,6 +15,13 @@ const HeaderContainer = styled.div`
 	#logo {
 		max-width: 160px;
 	}
+	#headerCta {
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		display: block;
+		transform: translate(50%, 300%) rotateZ(90deg);
+	}
 `
 const Header = ({ siteTitle }) => (
 	<HeaderContainer>
@@ -22,6 +29,12 @@ const Header = ({ siteTitle }) => (
 			<Link to="/">
 				<Logo id="logo" />
 			</Link>
+			<a
+				href="https://www.linkedin.com/in/migueldf10/"
+				id="headerCta"
+			>
+				Connect on LinkedIn
+			</a>
 		</nav>
 	</HeaderContainer>
 )
