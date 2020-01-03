@@ -1,6 +1,7 @@
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
 import React from 'react'
+import Logo from '../../theme/svg/yumm-logo.svg'
 const Header = ({ siteTitle }) => (
 	<div
 		style={{
@@ -23,7 +24,7 @@ const Header = ({ siteTitle }) => (
 						textDecoration: 'none',
 					}}
 				>
-					MIGUEL
+					<Logo />
 				</Link>
 			</h1>
 		</div>
