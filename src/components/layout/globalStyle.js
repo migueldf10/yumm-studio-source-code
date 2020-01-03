@@ -10,6 +10,13 @@ const GlobalStyle = createGlobalStyle`
         font-kerning: normal;
         font-feature-settings: "kern", "liga", "clig", "calt";
         margin: 0;
+        font-size: 18px;
+    }
+    html{
+        border: 4px solid ${theme.colorBlack};
+    }
+    div{
+        box-sizing: border-box;
     }
     article,
     aside,
@@ -102,7 +109,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 1em 40px;
     }
     hr {
-    box-sizing: content-box;
+    b: content-box;
     height: 0;
     overflow: visible;
     }
@@ -150,7 +157,7 @@ const GlobalStyle = createGlobalStyle`
     padding: .35em .625em .75em;
     }
     legend {
-    box-sizing: border-box;
+    b: border-box;
     color: inherit;
     display: table;
     max-width: 100%;
@@ -162,7 +169,7 @@ const GlobalStyle = createGlobalStyle`
     }
     [type=checkbox],
     [type=radio] {
-    box-sizing: border-box;
+    b: border-box;
     padding: 0;
     }
     [type=number]::-webkit-inner-spin-button,
@@ -187,13 +194,13 @@ const GlobalStyle = createGlobalStyle`
     }
 
     * {
-    box-sizing: inherit;
+    b: inherit;
     }
     *:before {
-    box-sizing: inherit;
+    b: inherit;
     }
     *:after {
-    box-sizing: inherit;
+    b: inherit;
     }
     
     img {
@@ -262,16 +269,7 @@ const GlobalStyle = createGlobalStyle`
     padding-top: 0;
     margin-bottom: 1.45rem;
     }
-    p {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: 1.45rem;
-    }
+    
     figure {
     margin-left: 0;
     margin-right: 0;
@@ -523,23 +521,48 @@ const GlobalStyle = createGlobalStyle`
         color: inherit;
         line-height: 1.1
     }
-    h1 {
-        font-size: 2.25rem;
+    h1,.h1 {
+        font-size: 2.25em;
     }
-    h2 {
-        font-size: 1.62671rem;
+    h2,.h2 {
+        font-size: 1.62671em;
     }
-    h3 {
-        font-size: 1.38316rem;
+    h3, .h3 {
+        font-size: 1.38316em;
     }
-    h4 {
-        font-size: 1rem;
+    h4, .h4 {
+        font-size: 1em;
     }
-    h5 {
-        font-size: 0.85028rem;
+    h5, .h5 {
+        font-size: 0.85028em;
     }
-    h6 {
-        font-size: 0.78405rem;
+    h6, .h6 {
+        font-size: 0.78405em;
+    }
+    .subtitle {
+        font-size: 1.3em;
+    }
+    p,.paragraph {
+        margin: 0;
+        padding: 0;
+        line-height: 1.5;
+        margin-bottom: 1.45rem;
+    }
+
+    /* Buttons */
+    .button {
+        letter-spacing: 0.5px;
+        display: table;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.1em;
+        padding: 10px 18px;
+        margin-bottom: 18px;
+
+        &.button-primary{
+            background-color: ${theme.colorBlack};
+            color: white;
+        }
     }
 `
 
