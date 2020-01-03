@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-
 import Header from '../header/header'
-import './layout.css'
+import GlobalStyle from './globalStyle'
+import Helmet from 'react-helmet'
 
 const Layout = ({ children }) => (
 	<StaticQuery
@@ -18,6 +18,13 @@ const Layout = ({ children }) => (
 		`}
 		render={data => (
 			<>
+				<Helmet>
+					<link
+						href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700&display=swap"
+						rel="stylesheet"
+					/>
+				</Helmet>
+				<GlobalStyle />
 				<Header siteTitle={data.site.siteMetadata.title} />
 				<div
 					style={{

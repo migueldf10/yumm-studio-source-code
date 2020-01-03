@@ -42,6 +42,12 @@ module.exports = {
 				path: `${__dirname}/data/posts`,
 			},
 		},
+		{
+			resolve: `gatsby-plugin-styled-components`,
+			options: {
+				// Add any options here
+			},
+		},
 
 		'gatsby-transformer-sharp',
 		'gatsby-plugin-sharp',
