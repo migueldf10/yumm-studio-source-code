@@ -13,13 +13,13 @@ export class FollowOnPinterest extends React.Component {
 				href="https://www.pinterest.com/yummstudio/"
 				data-pin-do="buttonFollow"
 			>
-				Yumm Studio
+				<span>Follow us on Pinterest @YummStudio</span>
 			</a>
 		)
 	}
 }
 
-export default class PinterestBoard extends React.Component {
+export class PinterestBoard extends React.Component {
 	constructor(props) {
 		super(props)
 		// Don't call this.setState() here!
@@ -56,7 +56,9 @@ export default class PinterestBoard extends React.Component {
 					data-pin-scale-height="800"
 					data-pin-scale-width="220"
 					href={url}
-				></a>
+				>
+					See our Pin Board
+				</a>
 			</div>
 		)
 	}

@@ -3,12 +3,22 @@ const path = require('path')
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
 	const { createNodeField } = actions
-
-	// you only want to operate on `Mdx` nodes. If you had content from a
-	// remote CMS you could also check to see if the parent node was a
-	// `File` node here
-
 	if (node.internal.type === 'Mdx') {
+		//LANGUAGE OPERATIONS
+		// in case lang is not defined, go to default
+		let language = 'en'
+		if (node.frontmatter.language) {
+			language = node.frontmatter.language
+		}
+		//TYPE OPERATIONS
+		// in case type is not defined, go to default
+		let type = 'article'
+		if (node.frontmatter.type) {
+			// default type,
+			type = node.frontmatter.type
+		}
+
+		//SLUG OPERATIONS
 		// default slug will be filename
 		let value = createFilePath({
 			node,
@@ -18,21 +28,34 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 		if (node.frontmatter.slug) {
 			value = '/' + node.frontmatter.slug
 		}
-		// We create node values for futher operations.
 
-		if (!node.frontmatter.type) {
-			// default type,
-			node.frontmatter.type = 'article'
+		//URL OPERATIONS
+		// only include langkey for not predef lang
+		let langKey = ''
+		if (language !== 'en') {
+			langKey = '/' + language
 		}
+		// remove type in url for pages.
+		let typeKey = ''
+		if (type !== 'page') {
+			typeKey = '/' + type
+		}
+		let url = langKey + typeKey + value
+
 		createNodeField({
 			name: 'slug',
 			node,
-			value: `${value}`,
+			value: `${url}`,
 		})
 		createNodeField({
 			name: 'type',
 			node,
-			value: node.frontmatter.type,
+			value: `${type}`,
+		})
+		createNodeField({
+			name: 'language',
+			node,
+			value: `${language}`,
 		})
 	}
 }

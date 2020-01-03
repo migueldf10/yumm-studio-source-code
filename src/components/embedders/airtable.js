@@ -6,12 +6,12 @@ export default class AirtableView extends React.Component {
 		const { url } = this.props
 		return (
 			<iframe
-				class="airtable-embed"
+				className="airtable-embed"
 				src={url}
-				frameborder="0"
-				onmousewheel=""
+				frameBorder="0"
 				width="100%"
 				height="533"
+				title="Airtable embeded view"
 				style={{
 					background: 'transparent',
 					border: '1px solid #ccc',

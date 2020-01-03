@@ -9,9 +9,10 @@ export default class MiroBoard extends React.Component {
 				width="640"
 				height="360"
 				src={url}
-				frameborder="0"
+				frameBorder="0"
 				scrolling="no"
-				allowfullscreen
+				title="Miro board embed"
+				allowFullScreen
 			/>
 		)
 	}

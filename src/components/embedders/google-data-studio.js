@@ -8,10 +8,12 @@ export default class GoogleDataStudioReport extends React.Component {
 			<iframe
 				width="600"
 				height="800"
+				title="Google Data Studio panel"
 				src={url}
-				frameborder="0"
+				frameBorder="0"
+				aria-label="Google data studio"
 				style={{ border: '0' }}
-				allowfullscreen
+				allowFullScreen
 			></iframe>
 		)
 	}
