@@ -15,6 +15,16 @@ const GlobalStyle = createGlobalStyle`
     html{
         border: 4px solid ${theme.colorBlack};
     }
+    @media only screen and (min-width: 480px) {
+        html,body {
+            font-size: 20px;
+        }
+    }
+    @media only screen and (min-width: 880px) {
+        html,body {
+            font-size: 22px;
+        }
+    }
     div{
         box-sizing: border-box;
     }
@@ -503,11 +513,7 @@ const GlobalStyle = createGlobalStyle`
     pre tt:after {
     content: "";
     }
-    @media only screen and (max-width: 480px) {
-        html {
-            font-size: 100%;
-        }
-    }
+    
 
     /* Typography */
 

@@ -72,14 +72,17 @@ export default function PageTemplate({ data: { post } }) {
 					<ul>
 						{headings.map((item, index) => (
 							<li key={index} className="">
-								{item.depth}
+								{item.depth > 1 ? '---' : ''}
+								{item.depth > 2 ? '---' : ''}
 								{item.value}
 							</li>
 						))}
 					</ul>
 				</PostSumUp>
 			</PostIntro>
-			<MDXRenderer>{body}</MDXRenderer>
+			<div style={{ maxWidth: '640px', margin: 'auto' }}>
+				<MDXRenderer>{body}</MDXRenderer>
+			</div>
 			<CommentCount config={disqusConfig} placeholder={'...'} />
 			<Disqus config={disqusConfig} />
 		</Layout>
