@@ -20,10 +20,18 @@ export default class HeroSection extends React.Component {
 		})
 	}
 	render() {
-		const { children, type = 'default', bg = 'none' } = this.props
+		const {
+			children,
+			type = 'default',
+			bg = 'none',
+			height = '100',
+		} = this.props
 		return (
 			<HeroContainer
-				style={{ minHeight: this.state.windowHeight }}
+				style={{
+					minHeight:
+						(this.state.windowHeight * height) / 100,
+				}}
 			>
 				<div className="content">{children}</div>
 			</HeroContainer>

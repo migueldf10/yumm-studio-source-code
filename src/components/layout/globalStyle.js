@@ -563,6 +563,10 @@ const GlobalStyle = createGlobalStyle`
             background-color: ${theme.colorBlack};
             color: white;
         }
+        &.button-primary-reverse{
+            color: ${theme.colorBlack};
+            background-color: white;
+        }
     }
 `
 
