@@ -13,7 +13,7 @@ const PostGridItem = styled.li`
 		color: ${theme.colorBlack};
 		font-size: 1.8em;
 		text-decoration: none;
-		padding: 12px 0px;
+		padding: 22px 0px;
 		margin: 0px 16px;
 		position: relative;
 		display: block;
@@ -25,6 +25,18 @@ const PostGridItem = styled.li`
 			height: 4px;
 			width: 40%;
 			background-color: ${theme.colorBlack};
+		}
+	}
+	.post-tags {
+		font-weight: 400;
+		font-size: 0.8rem;
+		margin-top: 8px;
+		span {
+			display: inline-block;
+			margin-right: 16px;
+			padding: 4px 6px;
+			color: ${theme.colorBlack};
+			/* color: white; */
 		}
 	}
 `
@@ -41,6 +53,7 @@ function Blog() {
 							excerpt
 							frontmatter {
 								title
+								tags
 							}
 							fields {
 								slug
@@ -57,6 +70,14 @@ function Blog() {
 				<PostGridItem key={post.id}>
 					<Link to={post.fields.slug}>
 						{post.frontmatter.title}
+
+						{post.frontmatter.tags && (
+							<div className="post-tags">
+								{post.frontmatter.tags.map(tag => (
+									<span>#{tag}</span>
+								))}
+							</div>
+						)}
 					</Link>
 				</PostGridItem>
 			))}

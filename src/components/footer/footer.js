@@ -2,11 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 import theme from '../../theme/variables'
 import Subscribe from './subscribe'
+import FooterMenu from '../../../data/menus/footer'
+import Menu from './menu'
 
 const FooterContainer = styled.div`
 	background-color: ${theme.colorBlack};
 	margin-top: 60px;
 	padding: 16px;
+	.content {
+		max-width: ${theme.contentMaxWidth};
+		margin: auto;
+	}
 	.intro {
 		color: white;
 		font-size: 1.7em;
@@ -35,14 +41,23 @@ export default class Footer extends React.Component {
 	render() {
 		return (
 			<FooterContainer>
-				<span className="intro">
-					Once a week, we share everything in our business.
-					Marketing, Business, Design... Receive a
-					compilation weekly:
-				</span>
-				<Subscribe />
-				<div className="foot">
-					<span>All rights reserved, Yumm.Studio 2020</span>
+				<div className="content">
+					<span className="intro">
+						Once a week, we share everything in our
+						business. Marketing, Business, Design...
+						Receive a compilation weekly:
+					</span>
+					<Subscribe />
+
+					<div className="foot">
+						<Menu menu={FooterMenu['en']} />
+					</div>
+
+					<div className="foot">
+						<span>
+							All rights reserved, Yumm.Studio 2020
+						</span>
+					</div>
 				</div>
 			</FooterContainer>
 		)
