@@ -48,7 +48,7 @@ const PostSumUp = styled.div`
 `
 export default function PageTemplate({ data: { post } }) {
 	const { id, body, frontmatter, fields, headings } = post
-	const { title } = frontmatter
+	const { title, tags } = frontmatter
 	const { slug } = fields
 
 	let disqusConfig = {
@@ -60,10 +60,13 @@ export default function PageTemplate({ data: { post } }) {
 	return (
 		<Layout>
 			<PostIntro height={60}>
-				<ul className="tags">
-					<li>Marketing</li>
-					<li>StartUp</li>
-				</ul>
+				{tags && (
+					<ul className="tags">
+						{tags.map(tag => (
+							<li>#{tag}</li>
+						))}
+					</ul>
+				)}
 				<h1>{title}</h1>
 				<PostSumUp>
 					<span className="intro">
@@ -96,6 +99,7 @@ export const pageQuery = graphql`
 			body
 			frontmatter {
 				title
+				tags
 			}
 			headings {
 				depth

@@ -1,5 +1,8 @@
 const { createFilePath } = require('gatsby-source-filesystem')
 const path = require('path')
+const moment = require('moment')
+const _ = require('lodash')
+const slugify = require('slugify')
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
 	const { createNodeField } = actions
@@ -26,7 +29,13 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 		})
 		// in case a custom slug exists in frontmatter
 		if (node.frontmatter.slug) {
-			value = '/' + node.frontmatter.slug
+			value =
+				'/' +
+				slugify(node.frontmatter.slug, {
+					replacement: '-', // replace spaces with replacement
+					remove: /[*+~.()'"!:@]/g, // regex to remove characters
+					lower: true, // result in lower case
+				})
 		}
 
 		//URL OPERATIONS
@@ -56,6 +65,17 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 			name: 'language',
 			node,
 			value: `${language}`,
+		})
+
+		const date = moment(node.frontmatter.date, 'DD/MM/YYYY')
+		if (!date.isValid) {
+			console.warn(`WARNING: Invalid date.`, node.frontmatter)
+		}
+
+		createNodeField({
+			node,
+			name: 'date',
+			value: date.toISOString(),
 		})
 	}
 }
@@ -89,8 +109,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 	}
 	// Create blog post pages.
 	const posts = result.data.allMdx.edges
+
 	// you'll call `createPage` for each result
 	posts.forEach(({ node }, index) => {
+		//populating Tag Set
+
 		let template
 		switch (node.fields.type) {
 			case 'article':
@@ -114,12 +137,3 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 		})
 	})
 }
-
-// In order to use relative paths from programmaticly created MDX files
-// exports.onCreateWebpackConfig = ({ actions }) => {
-//   actions.setWebpackConfig({
-//     resolve: {
-//       modules: [path.resolve(__dirname, "src"), "node_modules"]
-//     }
-//   });
-// };

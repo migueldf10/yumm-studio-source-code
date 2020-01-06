@@ -4,6 +4,17 @@ import Link from 'gatsby-link'
 import styled from 'styled-components'
 import theme from '../../theme/variables'
 
+const TagFilter = styled.div`
+	margin: 32px 0px;
+	span {
+		display: inline-block;
+		margin-right: 16px;
+		padding: 8px 12px;
+		background-color: ${theme.colorBlack};
+		color: white;
+		margin-bottom: 16px;
+	}
+`
 const PostGridItem = styled.li`
 	list-style: none;
 	margin: 0px;
@@ -40,7 +51,7 @@ const PostGridItem = styled.li`
 		}
 	}
 `
-function Blog() {
+function Blog(props) {
 	const { allMdx } = useStaticQuery(
 		graphql`
 			query {
@@ -64,24 +75,51 @@ function Blog() {
 			}
 		`
 	)
-	return (
-		<ul style={{ margin: 0 }}>
-			{allMdx.edges.map(({ node: post }) => (
-				<PostGridItem key={post.id}>
-					<Link to={post.fields.slug}>
-						{post.frontmatter.title}
+	// Creating a Set with all different Tags
 
-						{post.frontmatter.tags && (
-							<div className="post-tags">
-								{post.frontmatter.tags.map(tag => (
-									<span>#{tag}</span>
-								))}
-							</div>
-						)}
-					</Link>
-				</PostGridItem>
-			))}
-		</ul>
+	const tagSet = new Set()
+	allMdx.edges.map(({ node }) => {
+		if (node.frontmatter.tags) {
+			node.frontmatter.tags.forEach(tag => {
+				tagSet.add(tag)
+			})
+		}
+		return
+	})
+	let allTags = []
+	{
+		tagSet.forEach(tag => allTags.push(tag))
+	}
+	return (
+		<>
+			<TagFilter>
+				{allTags.map((tag, index) => (
+					<span key={index}>{tag}</span>
+				))}
+			</TagFilter>
+
+			<ul style={{ margin: 0 }}>
+				{allMdx.edges.map(({ node: post }) => (
+					<PostGridItem key={post.id}>
+						<Link to={post.fields.slug}>
+							{post.frontmatter.title}
+
+							{post.frontmatter.tags && (
+								<div className="post-tags">
+									{post.frontmatter.tags.map(
+										tag => (
+											<span key={tag}>
+												#{tag}
+											</span>
+										)
+									)}
+								</div>
+							)}
+						</Link>
+					</PostGridItem>
+				))}
+			</ul>
+		</>
 	)
 }
 export default Blog
