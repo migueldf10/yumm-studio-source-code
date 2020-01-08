@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 import theme from '../../theme/variables'
+import getAllUrlParams from '../../utils/getUrlParameters'
 
 const TagFilter = styled.div`
 	margin: 32px 0px;
@@ -75,6 +76,9 @@ function Blog(props) {
 			}
 		`
 	)
+
+	const [filterBy, setFilterBy] = useState(false)
+
 	// Creating a Set with all different Tags
 
 	const tagSet = new Set()
@@ -90,34 +94,70 @@ function Blog(props) {
 	{
 		tagSet.forEach(tag => allTags.push(tag))
 	}
+
+	function postFilter(object) {
+		let remove = true
+
+		if (object.node.frontmatter.tags) {
+			object.node.frontmatter.tags.map(tag => {
+				if (tag === filterBy) {
+					remove = false
+				}
+			})
+		}
+		if (!filterBy) {
+			return object
+		}
+		if (!remove) {
+			return object
+		}
+	}
+
+	useEffect(() => {
+		var urlFilter = getAllUrlParams().filter
+		if (!urlFilter) {
+			return
+		}
+		if (tagSet.has(urlFilter)) {
+			setFilterBy(urlFilter)
+		}
+	}, [])
+
 	return (
 		<>
 			<TagFilter>
 				{allTags.map((tag, index) => (
-					<span key={index}>{tag}</span>
+					<button
+						key={index}
+						onClick={() => setFilterBy(tag)}
+					>
+						{tag}
+					</button>
 				))}
 			</TagFilter>
 
 			<ul style={{ margin: 0 }}>
-				{allMdx.edges.map(({ node: post }) => (
-					<PostGridItem key={post.id}>
-						<Link to={post.fields.slug}>
-							{post.frontmatter.title}
+				{allMdx.edges
+					.filter(postFilter)
+					.map(({ node: post }) => (
+						<PostGridItem key={post.id}>
+							<Link to={post.fields.slug}>
+								{post.frontmatter.title}
 
-							{post.frontmatter.tags && (
-								<div className="post-tags">
-									{post.frontmatter.tags.map(
-										tag => (
-											<span key={tag}>
-												#{tag}
-											</span>
-										)
-									)}
-								</div>
-							)}
-						</Link>
-					</PostGridItem>
-				))}
+								{post.frontmatter.tags && (
+									<div className="post-tags">
+										{post.frontmatter.tags.map(
+											tag => (
+												<span key={tag}>
+													#{tag}
+												</span>
+											)
+										)}
+									</div>
+								)}
+							</Link>
+						</PostGridItem>
+					))}
 			</ul>
 		</>
 	)

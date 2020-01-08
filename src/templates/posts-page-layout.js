@@ -4,7 +4,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../components/layout/layout'
 import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
 import styled from 'styled-components'
-
+import Link from 'gatsby-link'
 const PostIntro = styled.div`
 	padding-top: 60vh;
 	min-height: 90vh;
@@ -63,7 +63,14 @@ export default function PageTemplate({ data: { post } }) {
 				{tags && (
 					<ul className="tags">
 						{tags.map(tag => (
-							<li>#{tag}</li>
+							<li>
+								<Link
+									key={tag}
+									to={'/stories?filter=' + tag}
+								>
+									#{tag}
+								</Link>
+							</li>
 						))}
 					</ul>
 				)}
