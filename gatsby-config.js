@@ -1,4 +1,7 @@
 const path = require('path')
+require('dotenv').config({
+	path: `.env.${process.env.NODE_ENV}`,
+})
 
 module.exports = {
 	siteMetadata: {
@@ -91,5 +94,20 @@ module.exports = {
 		// this (optional) plugin enables Progressive Web App + Offline functionality
 		// To learn more, visit: https://gatsby.app/offline
 		// 'gatsby-plugin-offline',
+		{
+			resolve: 'gatsby-plugin-google-tagmanager',
+			options: {
+				id: '${process.env.GOOGLE_TAGMANAGER_ID}',
+
+				// Include GTM in development.
+				// Defaults to false meaning GTM will only be loaded in production.
+				includeInDevelopment: true,
+
+				// datalayer to be set before GTM is loaded
+				// should be an object or a function that is executed in the browser
+				// Defaults to null
+				defaultDataLayer: { platform: 'gatsby' },
+			},
+		},
 	],
 }
