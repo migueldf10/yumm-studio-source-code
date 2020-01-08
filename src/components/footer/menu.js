@@ -20,6 +20,7 @@ export default class Menu extends React.Component {
 						>
 							<Link
 								to={item.link}
+								key={index}
 								style={{
 									marginRight: '16px',
 									color: 'white',
