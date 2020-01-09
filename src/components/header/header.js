@@ -32,6 +32,8 @@ const Header = ({ siteTitle }) => (
 			<a
 				href="https://www.linkedin.com/in/migueldf10/"
 				id="headerCta"
+				target="_blank"
+				rel="noopener noreferrer"
 			>
 				Connect on LinkedIn
 			</a>

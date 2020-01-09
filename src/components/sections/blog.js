@@ -129,6 +129,8 @@ function Blog(props) {
 				{allTags.map((tag, index) => (
 					<button
 						key={index}
+						id={'filterBy_' + tag}
+						className={'filter button ' + tag}
 						onClick={() => setFilterBy(tag)}
 					>
 						{tag}
