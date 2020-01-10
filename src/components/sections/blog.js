@@ -7,7 +7,7 @@ import getAllUrlParams from '../../utils/getUrlParameters'
 
 const TagFilter = styled.div`
 	margin: 32px 0px;
-	span {
+	a {
 		display: inline-block;
 		margin-right: 16px;
 		padding: 8px 12px;
@@ -88,12 +88,10 @@ function Blog(props) {
 				tagSet.add(tag)
 			})
 		}
-		return
+		return null
 	})
 	let allTags = []
-	{
-		tagSet.forEach(tag => allTags.push(tag))
-	}
+	tagSet.forEach(tag => allTags.push(tag))
 
 	function postFilter(object) {
 		let remove = true
@@ -103,6 +101,7 @@ function Blog(props) {
 				if (tag === filterBy) {
 					remove = false
 				}
+				return null
 			})
 		}
 		if (!filterBy) {
@@ -113,28 +112,34 @@ function Blog(props) {
 		}
 	}
 
+	var urlFilter = getAllUrlParams().filter
+
 	useEffect(() => {
-		var urlFilter = getAllUrlParams().filter
 		if (!urlFilter) {
 			return
 		}
 		if (tagSet.has(urlFilter)) {
 			setFilterBy(urlFilter)
+			window.dataLayer.push({
+				event: 'filter',
+				filter_by: urlFilter,
+				results: allMdx.edges.filter(postFilter).length,
+			})
 		}
-	}, [])
+	}, [urlFilter])
 
 	return (
 		<>
 			<TagFilter>
 				{allTags.map((tag, index) => (
-					<button
+					<Link
 						key={index}
 						id={'filterBy_' + tag}
 						className={'filter button ' + tag}
-						onClick={() => setFilterBy(tag)}
+						to={'/stories?filter=' + tag}
 					>
 						{tag}
-					</button>
+					</Link>
 				))}
 			</TagFilter>
 
