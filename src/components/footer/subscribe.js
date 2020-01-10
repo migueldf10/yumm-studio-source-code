@@ -30,9 +30,9 @@ export default class Subscribe extends React.Component {
 		return (
 			<SubscribeContainer>
 				<form
+					id="newsletter-form"
 					action="https://studio.us3.list-manage.com/subscribe/post?u=3dc1cec1d24d074a1709727a0&amp;id=a4504acfd2"
 					method="post"
-					id="mc-embedded-subscribe-form"
 					name="mc-embedded-subscribe-form"
 					className="validate"
 					target="_blank"
