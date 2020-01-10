@@ -22,8 +22,8 @@ export default class HeroSection extends React.Component {
 	render() {
 		const {
 			children,
-			type = 'default',
-			bg = 'none',
+			// type = 'default',
+			// bg = 'none',
 			height = '100',
 		} = this.props
 		return (
