@@ -13,6 +13,7 @@ export default class Menu extends React.Component {
 				>
 					{menu.map((item, index) => (
 						<li
+							key={index}
 							style={{
 								listStyle: 'none',
 								display: 'inline-block',
@@ -20,7 +21,6 @@ export default class Menu extends React.Component {
 						>
 							<Link
 								to={item.link}
-								key={index}
 								style={{
 									marginRight: '16px',
 									color: 'white',
