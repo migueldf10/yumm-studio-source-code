@@ -69,12 +69,9 @@ export default function PageTemplate({ data: { post } }) {
 			<PostIntro height={60}>
 				{tags && (
 					<ul className="tags">
-						{tags.map(tag => (
-							<li>
-								<Link
-									key={tag}
-									to={'/stories?filter=' + tag}
-								>
+						{tags.map((tag, index) => (
+							<li key={index}>
+								<Link to={'/stories?filter=' + tag}>
 									#{tag}
 								</Link>
 							</li>
