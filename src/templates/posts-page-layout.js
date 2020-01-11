@@ -5,6 +5,8 @@ import Layout from '../components/layout/layout'
 import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
 import styled from 'styled-components'
 import Link from 'gatsby-link'
+import SEO from '../components/seo'
+import Img from 'gatsby-image'
 const PostIntro = styled.div`
 	padding-top: 60vh;
 	min-height: 90vh;
@@ -48,7 +50,7 @@ const PostSumUp = styled.div`
 `
 export default function PageTemplate({ data: { post } }) {
 	const { id, body, frontmatter, fields, headings } = post
-	const { title, tags } = frontmatter
+	const { title, tags, seo_title, seo_description } = frontmatter
 	const { slug } = fields
 
 	let disqusConfig = {
@@ -59,6 +61,11 @@ export default function PageTemplate({ data: { post } }) {
 
 	return (
 		<Layout>
+			<SEO
+				title={seo_title}
+				description={seo_description}
+				url={slug}
+			/>
 			<PostIntro height={60}>
 				{tags && (
 					<ul className="tags">
@@ -107,6 +114,8 @@ export const pageQuery = graphql`
 			frontmatter {
 				title
 				tags
+				seo_title
+				seo_description
 			}
 			headings {
 				depth

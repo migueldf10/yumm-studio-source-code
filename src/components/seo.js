@@ -1,17 +1,10 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
-function SEO({ description, lang, meta, title }) {
-	const { site } = useStaticQuery(
+function SEO({ description, lang, meta, title, url, miniatureUrl }) {
+	const { site, file } = useStaticQuery(
 		graphql`
 			query {
 				site {
@@ -19,7 +12,13 @@ function SEO({ description, lang, meta, title }) {
 						title
 						description
 						author
+						siteUrl
 					}
+				}
+				file(base: { eq: "default-miniature.png" }) {
+					sourceInstanceName
+					base
+					publicURL
 				}
 			}
 		`
@@ -27,6 +26,9 @@ function SEO({ description, lang, meta, title }) {
 
 	const metaDescription =
 		description || site.siteMetadata.description
+	const fullUrl = site.siteMetadata.siteUrl + url
+
+	const miniaturePublicUrl = miniatureUrl || file.publicURL
 
 	return (
 		<Helmet
@@ -53,6 +55,15 @@ function SEO({ description, lang, meta, title }) {
 					content: `website`,
 				},
 				{
+					property: `og:url`,
+					content: fullUrl,
+				},
+				// <meta property="og:image" content={imgUrl} />
+				{
+					property: `og:image`,
+					content: miniaturePublicUrl,
+				},
+				{
 					name: `twitter:card`,
 					content: `summary`,
 				},
@@ -69,7 +80,9 @@ function SEO({ description, lang, meta, title }) {
 					content: metaDescription,
 				},
 			].concat(meta)}
-		/>
+		>
+			<link rel="canonical" href={fullUrl} />
+		</Helmet>
 	)
 }
 
