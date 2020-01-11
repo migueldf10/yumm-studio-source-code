@@ -6,7 +6,7 @@ import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
 import styled from 'styled-components'
 import Link from 'gatsby-link'
 import SEO from '../components/seo'
-import Img from 'gatsby-image'
+
 const PostIntro = styled.div`
 	padding-top: 60vh;
 	min-height: 90vh;
@@ -50,7 +50,13 @@ const PostSumUp = styled.div`
 `
 export default function PageTemplate({ data: { post } }) {
 	const { id, body, frontmatter, fields, headings } = post
-	const { title, tags, seo_title, seo_description } = frontmatter
+	const {
+		title,
+		tags,
+		seo_title,
+		seo_description,
+		miniature,
+	} = frontmatter
 	const { slug } = fields
 
 	let disqusConfig = {
@@ -59,13 +65,21 @@ export default function PageTemplate({ data: { post } }) {
 		title: title,
 	}
 
+	let miniatureUrl = null
+	if (miniature) {
+		miniatureUrl = miniature.childImageSharp.fixed.src
+	}
+
+	const seoData = {
+		title: seo_title,
+		description: seo_description,
+		url: slug,
+		miniatureUrl: miniatureUrl,
+	}
+
 	return (
 		<Layout>
-			<SEO
-				title={seo_title}
-				description={seo_description}
-				url={slug}
-			/>
+			<SEO seoData={seoData} />
 			<PostIntro height={60}>
 				{tags && (
 					<ul className="tags">
@@ -113,6 +127,13 @@ export const pageQuery = graphql`
 				tags
 				seo_title
 				seo_description
+				miniature {
+					childImageSharp {
+						fixed(width: 1200) {
+							src
+						}
+					}
+				}
 			}
 			headings {
 				depth
