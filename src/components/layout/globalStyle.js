@@ -73,7 +73,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: underline;
     text-decoration: underline dotted;
     }
-    b,
+
     strong {
     font-weight: inherit;
     font-weight: bolder;
@@ -332,14 +332,17 @@ const GlobalStyle = createGlobalStyle`
     margin-bottom: 1.45rem;
     }
     blockquote {
-    margin-left: 1.45rem;
+    margin-left: 0.4rem;
     margin-right: 1.45rem;
     margin-top: 0;
     padding-bottom: 0;
-    padding-left: 0;
+    
+    padding-left: 0.9rem;
     padding-right: 0;
     padding-top: 0;
     margin-bottom: 1.45rem;
+    font-style: italic;
+    border-left: 4px solid ${theme.colorGray}
     }
     form {
     margin-left: 0;
