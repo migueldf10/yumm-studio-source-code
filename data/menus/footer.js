@@ -13,19 +13,7 @@ const FooterMenu = {
 			title: 'Jobs',
 		},
 		{
-			link: '/index',
-			title: 'Index',
-		},
-		{
-			link: '/index',
-			title: 'Index',
-		},
-		{
-			link: '/index',
-			title: 'Index',
-		},
-		{
-			link: '/index',
+			link: '/',
 			title: 'Index',
 		},
 	],
