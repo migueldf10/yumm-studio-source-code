@@ -47,39 +47,52 @@ const SharePanel = styled.div`
 export default class Share extends React.Component {
 	constructor(props) {
 		super(props)
+		this.updateWindowHeight = this.updateWindowHeight.bind(this)
 		this.state = {
 			ask: false,
 			showPanel: false,
+			askClasses: { display: 'none' },
+			windowHeight: 0,
 		}
 	}
 
 	componentDidMount() {
+		this.updateWindowHeight()
 		window.addEventListener('scroll', this.handleScroll)
 	}
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this.handleScroll)
 	}
 	handleScroll = ev => {
-		if (window.scrollY > 2450) {
+		if (window.scrollY > this.state.windowHeight / 2) {
 			this.setState({
 				ask: true,
 			})
-		} else {
-			this.setState({
-				ask: false,
-			})
 		}
+	}
+	updateWindowHeight() {
+		this.setState({
+			windowHeight: window.document.body.offsetHeight,
+		})
 	}
 
 	sharePanelToggleClickHandler = () => {
+		window.dataLayer.push({
+			event: 'showShareMenu',
+		})
 		this.setState(prevState => {
 			return { showPanel: !prevState.showPanel }
 		})
 	}
+	addShareToDataLayer = element => {
+		window.dataLayer.push({
+			event: 'share',
+			channel: element,
+		})
+	}
 	render() {
-		let askClasses = { display: 'none' }
 		if (this.state.ask || this.state.showPanel) {
-			askClasses = { display: 'block' }
+			this.state.askClasses = { display: 'block' }
 		}
 		let panelClasses = ''
 		if (this.state.showPanel) {
@@ -88,7 +101,7 @@ export default class Share extends React.Component {
 		const { title, url } = this.props.data
 		return (
 			<>
-				<ShareQuestionContainer style={askClasses}>
+				<ShareQuestionContainer style={this.state.askClasses}>
 					{this.state.showPanel ? (
 						<span
 							onClick={
@@ -144,6 +157,12 @@ export default class Share extends React.Component {
 								' !'
 							}
 							data-action="share/whatsapp/share"
+							onClick={() => {
+								this.addShareToDataLayer('whatsapp')
+							}}
+							onKeyDown={() => {
+								this.addShareToDataLayer('whatsapp')
+							}}
 						>
 							Share via Whatsapp
 						</a>
@@ -159,6 +178,12 @@ export default class Share extends React.Component {
 								'&text=Look' +
 								'&hashtags=css,html'
 							}
+							onClick={() => {
+								this.addShareToDataLayer('twitter')
+							}}
+							onKeyDown={() => {
+								this.addShareToDataLayer('twitter')
+							}}
 						>
 							Share via Twitter
 						</a>
@@ -175,6 +200,12 @@ export default class Share extends React.Component {
 								title +
 								'&summary=https://yumm.studio'
 							}
+							onClick={() => {
+								this.addShareToDataLayer('linkedin')
+							}}
+							onKeyDown={() => {
+								this.addShareToDataLayer('linkedin')
+							}}
 						>
 							Share on LinkedIn
 						</a>
