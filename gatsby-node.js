@@ -2,7 +2,7 @@ const { createFilePath } = require('gatsby-source-filesystem')
 const path = require('path')
 const moment = require('moment')
 const _ = require('lodash')
-const slugify = require('slugify')
+const slugGenerator = require('./src/utils/slugGenerator')
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
 	const { createNodeField } = actions
@@ -29,13 +29,8 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 		})
 		// in case a custom slug exists in frontmatter
 		if (node.frontmatter.slug) {
-			value =
-				'/' +
-				slugify(node.frontmatter.slug, {
-					replacement: '-', // replace spaces with replacement
-					remove: /[*+~.()'"!:@]/g, // regex to remove characters
-					lower: true, // result in lower case
-				})
+			value = '/' + slugGenerator(node.frontmatter.slug)
+			console.log(value)
 		}
 
 		//URL OPERATIONS

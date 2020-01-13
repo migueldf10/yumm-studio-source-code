@@ -1,4 +1,6 @@
 function getAllUrlParams(url) {
+	// Escape to avoid error on SSR
+
 	// get query string from url (optional) or window
 	var queryString = url
 		? url.split('?')[1]

@@ -520,7 +520,7 @@ const GlobalStyle = createGlobalStyle`
 
     /* Typography */
 
-    h1,h2,h3,h4,h5,h6{
+    h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
         font-family: 'Source Sans Pro', sans-serif;
         margin: 0;
         padding: 0;

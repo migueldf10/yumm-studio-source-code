@@ -4,6 +4,7 @@ import Link from 'gatsby-link'
 import styled from 'styled-components'
 import theme from '../../theme/variables'
 import getAllUrlParams from '../../utils/getUrlParameters'
+import * as Scroll from 'react-scroll'
 
 const TagFilter = styled.div`
 	margin: 32px 0px;
@@ -112,7 +113,11 @@ function Blog(props) {
 		}
 	}
 
-	var urlFilter = getAllUrlParams().filter
+	if (typeof window != 'undefined') {
+		var urlFilter = getAllUrlParams().filter
+		// return
+	}
+	var scroller = Scroll.scroller
 
 	useEffect(() => {
 		if (!urlFilter) {
@@ -125,12 +130,18 @@ function Blog(props) {
 				filter_by: urlFilter,
 				results: allMdx.edges.filter(postFilter).length,
 			})
+			scroller.scrollTo('tag_filter', {
+				duration: 100,
+				delay: 0,
+				smooth: true,
+				offset: -50, // Scrolls to element + 50 pixels down the page
+			})
 		}
 	}, [urlFilter])
 
 	return (
 		<>
-			<TagFilter>
+			<TagFilter id="tag_filter">
 				{allTags.map((tag, index) => (
 					<Link
 						key={index}

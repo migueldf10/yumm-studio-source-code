@@ -6,6 +6,7 @@ import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
 import styled from 'styled-components'
 import Link from 'gatsby-link'
 import SEO from '../components/seo'
+import Share from '../components/share'
 
 const PostIntro = styled.div`
 	padding-top: 60vh;
@@ -111,6 +112,7 @@ export default function PageTemplate({ data: { post } }) {
 			<div style={{ maxWidth: '640px', margin: 'auto' }}>
 				<MDXRenderer>{body}</MDXRenderer>
 			</div>
+			<Share data={seoData} />
 			<CommentCount config={disqusConfig} placeholder={'...'} />
 			<Disqus config={disqusConfig} />
 		</Layout>
