@@ -7,10 +7,6 @@ const HeroContainer = styled.div`
 	.content {
 		margin-bottom: 200px;
 	}
-	b {
-		font-weight: 400;
-		background-color: yellow;
-	}
 	h1,
 	h2,
 	h3,
