@@ -1,11 +1,40 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import theme from '../../theme/variables'
 const HeroContainer = styled.div`
 	min-height: 100vh;
 	padding-top: 200px;
 	.content {
-		margin-bottom: 0px;
+		margin-bottom: 200px;
+	}
+	b {
+		font-weight: 400;
+		background-color: yellow;
+	}
+	h1,
+	h2,
+	h3,
+	.h1,
+	.h2,
+	.h3 {
+		font-size: 3em;
+	}
+	.subtitle {
+		font-size: 1.5em;
+	}
+
+	@media screen and (max-width: ${theme.bpMobileMini}) {
+		font-size: 1em;
+	}
+	@media screen and (min-width: ${theme.bpDesktop}) {
+		h1,
+		h2,
+		h3,
+		.h1,
+		.h2,
+		.h3 {
+			font-size: 4.5em;
+		}
 	}
 `
 export default class HeroSection extends React.Component {

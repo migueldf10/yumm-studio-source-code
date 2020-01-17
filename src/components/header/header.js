@@ -7,6 +7,10 @@ import theme from '../../theme/variables'
 
 const HeaderContainer = styled.div`
 	position: relative;
+	a {
+		color: inherit;
+		text-decoration: inherit;
+	}
 	nav {
 		position: fixed;
 		left: 0px;
@@ -29,7 +33,9 @@ const HeaderContainer = styled.div`
 		top: 16px;
 		display: block;
 		text-align: left;
+		color: ${theme.colorBlack};
 		transform: translate(50%, 0) rotateZ(90deg) translate(50%, 0%);
+		font-size: 0.8em;
 	}
 `
 const Header = ({ siteTitle }) => (
