@@ -109,7 +109,7 @@ export default function PageTemplate({ data: { post } }) {
 					</ul>
 				</PostSumUp>
 			</PostIntro>
-			<div style={{ maxWidth: '640px', margin: 'auto' }}>
+			<div>
 				<MDXRenderer>{body}</MDXRenderer>
 			</div>
 			<Share data={seoData} />
