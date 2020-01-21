@@ -41,7 +41,8 @@ export default class Footer extends React.Component {
 	render() {
 		return (
 			<FooterContainer>
-				<div className="content">
+				<div className="content" id="FooterCta">
+					<br />
 					<span className="intro">
 						Once a week, we share everything in our
 						business. Marketing, Business, Design...

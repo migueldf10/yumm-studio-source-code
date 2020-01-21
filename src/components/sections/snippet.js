@@ -1,13 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import theme from '../../theme/variables'
-const HeroContainer = styled.div`
-	min-height: 100vh;
-	padding-top: 200px;
+
+const SnippetContainer = styled.div`
 	color: ${theme.colorBlack};
-	.content {
-		margin-bottom: 200px;
-	}
+
 	h1,
 	h2,
 	h3,
@@ -42,7 +39,7 @@ const HeroContainer = styled.div`
 		}
 	}
 `
-export default class HeroSection extends React.Component {
+export default class SnippetSection extends React.Component {
 	constructor(props) {
 		super(props)
 		// Don't call this.setState() here!
@@ -61,15 +58,9 @@ export default class HeroSection extends React.Component {
 			height = '100',
 		} = this.props
 		return (
-			<HeroContainer
-				style={{
-					minHeight:
-						(this.state.windowHeight * height) / 100,
-				}}
-				className={theme}
-			>
-				<div className="content">{children}</div>
-			</HeroContainer>
+			<SnippetContainer className={theme}>
+				<div className="">{children}</div>
+			</SnippetContainer>
 		)
 	}
 }
