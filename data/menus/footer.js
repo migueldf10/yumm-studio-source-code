@@ -1,8 +1,12 @@
 const FooterMenu = {
 	en: [
 		{
-			link: '/thank-you',
-			title: 'Special thanks',
+			link: '/',
+			title: 'Index',
+		},
+		{
+			link: '/stories',
+			title: 'Blog',
 		},
 		{
 			link: '/hire-yumm',
@@ -11,10 +15,6 @@ const FooterMenu = {
 		{
 			link: '/jobs',
 			title: 'Jobs',
-		},
-		{
-			link: '/',
-			title: 'Index',
 		},
 	],
 }

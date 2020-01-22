@@ -580,6 +580,9 @@ const GlobalStyle = createGlobalStyle`
             color: ${theme.colorBlack};
             background-color: white;
         }
+        &.inline{
+            display: inline-block;
+        }
     }
 `
 
