@@ -333,16 +333,17 @@ const GlobalStyle = createGlobalStyle`
     }
     blockquote {
     margin-left: 0.4rem;
-    margin-right: 1.45rem;
+    margin-right: 2.3em;
     margin-top: 0;
     padding-bottom: 0;
-    
     padding-left: 0.9rem;
     padding-right: 0;
     padding-top: 0;
-    margin-bottom: 1.45rem;
+    margin-bottom: 2.3em;
     font-style: italic;
-    border-left: 4px solid ${theme.colorGray}
+    border-left: 4px solid ${theme.colorGray};
+    font-size: 1.1em;
+    line-height: 1.4;
     }
     form {
     margin-left: 0;
@@ -397,9 +398,10 @@ const GlobalStyle = createGlobalStyle`
     padding-top: 0;
     margin-bottom: 1.45rem;
     }
-    b {
-    font-weight: bold;
+    em {
+        font-style: italic;
     }
+
     strong {
     font-weight: bold;
     }

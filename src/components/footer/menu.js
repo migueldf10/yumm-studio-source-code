@@ -17,12 +17,14 @@ export default class Menu extends React.Component {
 							style={{
 								listStyle: 'none',
 								display: 'inline-block',
+								margin: '0px',
 							}}
 						>
 							<Link
 								to={item.link}
 								style={{
-									marginRight: '16px',
+									padding: '8px 16px 8px 0px',
+									display: 'inline-block',
 									color: 'white',
 									listStyle: 'none',
 									textDecoration: 'none',
