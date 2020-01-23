@@ -7,22 +7,28 @@ const Table = styled.table`
 		border: 1px solid black;
 		border-collapse: collapse;
 		padding: 10px;
+		white-space: nowrap;
 	}
 	td {
 		/* background-color: blue; */
-		white-space: nowrap;
 	}
 `
 
 export default class extends React.Component {
 	render() {
-		const List = this.props.data.allMdx.edges.map(
+		const List = this.props.data.posts.edges.map(
 			(edge, index) => (
 				<tr>
-					<td>{index}</td>
+					<td>{index + 1}</td>
 					<td>{edge.node.frontmatter.title}</td>
+					<td>
+						{edge.node.frontmatter.title.length}
+						{edge.node.frontmatter.title.length > 60
+							? ' - BAD'
+							: ' - ok'}
+					</td>
 					<td>{edge.node.frontmatter.type}</td>
-					<td>{edge.node.frontmatter.slug}</td>
+					<td>{edge.node.fields.slug}</td>
 					<td>{edge.node.frontmatter.seo_title}</td>
 					<td>{edge.node.frontmatter.seo_description}</td>
 					<td>{edge.node.frontmatter.language}</td>
@@ -44,6 +50,7 @@ export default class extends React.Component {
 				<tr>
 					<th>nr</th>
 					<th>title</th>
+					<th>title ev</th>
 					<th>type</th>
 					<th>slug</th>
 					<th>seo_title</th>
@@ -63,7 +70,44 @@ export default class extends React.Component {
 
 export const seoTestsQuery = graphql`
 	query seoTestsQuery {
-		allMdx(sort: { fields: [frontmatter___type], order: [ASC] }) {
+		posts: allMdx(
+			filter: { frontmatter: { type: { eq: "article" } } }
+			sort: { fields: [frontmatter___type], order: [ASC] }
+		) {
+			edges {
+				node {
+					wordCount {
+						words
+					}
+					fields {
+						slug
+						type
+						language
+						date
+						__typename
+					}
+					frontmatter {
+						title
+						type
+						slug
+						seo_title
+						seo_description
+						language
+						date
+						tags
+						description
+						miniature {
+							relativePath
+						}
+						state
+					}
+				}
+			}
+		}
+		pages: allMdx(
+			filter: { frontmatter: { type: { eq: "page" } } }
+			sort: { fields: [frontmatter___type], order: [ASC] }
+		) {
 			edges {
 				node {
 					wordCount {
