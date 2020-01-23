@@ -21,33 +21,29 @@ export default class extends React.Component {
 				<tr>
 					<td>{index + 1}</td>
 					<td>{edge.node.frontmatter.title}</td>
-					<td>
-						{edge.node.frontmatter.title.length}
-						{edge.node.frontmatter.title.length > 60
-							? ' - BAD'
-							: ' - ok'}
-					</td>
 					<td>{edge.node.frontmatter.type}</td>
 					<td>{edge.node.fields.slug}</td>
 					<td>
-						{edge.node.frontmatter.seo_title} | -
-						{edge.node.frontmatter.seo_title &&
-							edge.node.frontmatter.seo_title.length}
-						|
-						{edge.node.frontmatter.seo_title &&
-						edge.node.frontmatter.seo_title.length > 160
-							? 'bad'
-							: 'good'}{' '}
+						{edge.node.frontmatter.seo_title}
 						<hr />
 						{edge.node.frontmatter.seo_description}
+					</td>
+					<td>
+						{edge.node.frontmatter.seo_title &&
+							edge.node.frontmatter.seo_title.length}
+						{edge.node.frontmatter.seo_title &&
+						edge.node.frontmatter.seo_title.length > 60
+							? ' - BAD'
+							: ' - ok'}
+						<hr />
 						{edge.node.frontmatter.seo_description &&
 							edge.node.frontmatter.seo_description
 								.length}
 						{edge.node.frontmatter.seo_description &&
 						edge.node.frontmatter.seo_description.length >
 							160
-							? 'bad'
-							: 'good'}
+							? ' | bad'
+							: ' | good'}
 					</td>
 					{/* <td>{edge.node.frontmatter.seo_description}</td> */}
 					<td>{edge.node.frontmatter.language}</td>
@@ -69,10 +65,10 @@ export default class extends React.Component {
 				<tr>
 					<th>nr</th>
 					<th>title</th>
-					<th>title ev</th>
 					<th>type</th>
 					<th>slug</th>
 					<th>seo_title</th>
+					<th>title ev</th>
 					{/* <th>seo_description</th> */}
 					<th>language</th>
 					<th>date</th>

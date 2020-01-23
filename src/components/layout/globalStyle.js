@@ -66,6 +66,11 @@ const GlobalStyle = createGlobalStyle`
             color: ${theme.colorPrimary};
             outline-width: 0;
         }
+        &.black{
+            color: ${theme.colorBlack};
+            text-decoration: none;
+            font-style: italic;
+        }
     }
 
     abbr[title] {

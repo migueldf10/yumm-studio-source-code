@@ -59,6 +59,7 @@ const PostSumUp = styled.div`
 		rgba(255, 93, 29, 1) 62%,
 		rgba(218, 33, 33, 1) 100%
 	);
+	margin-bottom: 48px;
 
 	/* Internal */
 	.intro {
@@ -171,6 +172,9 @@ export default function PageTemplate({ data: { post } }) {
 
 					<span className="heading">Index:</span>
 					<ul>
+						<li className={'sumup-item depth-2'}>
+							{title}
+						</li>
 						{headings.map((item, index) => (
 							<li
 								key={index}
