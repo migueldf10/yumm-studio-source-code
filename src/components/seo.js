@@ -48,6 +48,7 @@ function SEO({ seoData }) {
 			title={seoTitle}
 			titleTemplate={`%s | ${site.siteMetadata.title}`}
 		>
+			<link rel="canonical" href={fullUrl} />
 			<meta name="description" content={metaDescription} />
 			<meta name="og:title" content={seoTitle} />
 			<meta name="og:description" content={metaDescription} />
@@ -59,14 +60,16 @@ function SEO({ seoData }) {
 				name="twitter:description"
 				content={metaDescription}
 			/>
-
 			<meta name="twitter:title" content={seoTitle} />
 			<meta name="twitter:card" content="summary" />
 			<meta
 				name="twitter:creator"
 				content={site.siteMetadata.author}
 			/>
-			<link rel="canonical" href={fullUrl} />
+			<meta
+				name="p:domain_verify"
+				content="9d3248d335f55fc48e42d3a87ffa60b2"
+			/>
 		</Helmet>
 	)
 }
