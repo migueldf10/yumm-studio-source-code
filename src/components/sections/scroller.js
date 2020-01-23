@@ -3,17 +3,16 @@ import * as Scroll from 'react-scroll'
 
 export default class Sroller extends React.Component {
 	render() {
-		const { children, scrollTo = '#' } = this.props
+		const {
+			children,
+			scrollTo = '#',
+			className = '',
+		} = this.props
 
 		return (
 			<button
-				style={{
-					background: 'none',
-					border: 'none',
-					color: 'red',
-				}}
+				className={className}
 				onClick={() => {
-					console.log(scrollTo)
 					Scroll.scroller.scrollTo(scrollTo, {
 						duration: 300,
 						delay: 0,

@@ -568,6 +568,7 @@ const GlobalStyle = createGlobalStyle`
     /* Buttons */
     .button {
         letter-spacing: 0.5px;
+        text-align: left;
         display: table;
         font-weight: 700;
         text-decoration: none;
@@ -589,6 +590,15 @@ const GlobalStyle = createGlobalStyle`
         }
         &.inline{
             display: inline-block;
+        }
+        &.fake {
+            text-align: left;
+            font-weight: inherit;
+            padding: 0px;
+            margin: 0px; 
+        }
+        &.red{
+            color: red;
         }
     }
 `
