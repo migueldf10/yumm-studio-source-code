@@ -6,7 +6,12 @@ export default class Sroller extends React.Component {
 		const { children, scrollTo = '#' } = this.props
 
 		return (
-			<a
+			<button
+				style={{
+					background: 'none',
+					border: 'none',
+					color: 'red',
+				}}
 				onClick={() => {
 					console.log(scrollTo)
 					Scroll.scroller.scrollTo(scrollTo, {
@@ -18,7 +23,7 @@ export default class Sroller extends React.Component {
 				}}
 			>
 				{children}
-			</a>
+			</button>
 		)
 	}
 }

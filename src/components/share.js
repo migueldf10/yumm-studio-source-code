@@ -91,8 +91,9 @@ export default class Share extends React.Component {
 		})
 	}
 	render() {
+		let askStyle = { display: 'none' }
 		if (this.state.ask || this.state.showPanel) {
-			this.state.askClasses = { display: 'block' }
+			askStyle = { display: 'block' }
 		}
 		let panelClasses = ''
 		if (this.state.showPanel) {
@@ -101,7 +102,7 @@ export default class Share extends React.Component {
 		const { title, url } = this.props.data
 		return (
 			<>
-				<ShareQuestionContainer style={this.state.askClasses}>
+				<ShareQuestionContainer style={askStyle}>
 					{this.state.showPanel ? (
 						<span
 							onClick={

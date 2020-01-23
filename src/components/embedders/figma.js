@@ -23,6 +23,7 @@ export default class FigmaEmbed extends React.Component {
 				height="450"
 				src={url}
 				allowFullScreen
+				title={'figma_model_' + url}
 			></iframe>
 		)
 	}

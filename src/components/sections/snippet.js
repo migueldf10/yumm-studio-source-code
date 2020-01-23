@@ -40,22 +40,11 @@ const SnippetContainer = styled.div`
 	}
 `
 export default class SnippetSection extends React.Component {
-	constructor(props) {
-		super(props)
-		// Don't call this.setState() here!
-		this.state = { windowHeight: 0 }
-	}
-	componentDidMount() {
-		this.setState((state, props) => {
-			return { windowHeight: window.innerHeight }
-		})
-	}
 	render() {
 		const {
 			children,
 			// type = 'default',
 			theme = 'none',
-			height = '100',
 		} = this.props
 		return (
 			<SnippetContainer className={theme}>
