@@ -58,7 +58,10 @@ function Blog(props) {
 		graphql`
 			query {
 				allMdx(
-					filter: { fields: { type: { in: ["article"] } } }
+					filter: {
+						fields: { type: { in: ["article"] } }
+						frontmatter: { state: { nin: "draft" } }
+					}
 				) {
 					edges {
 						node {

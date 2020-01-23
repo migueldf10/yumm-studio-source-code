@@ -29,8 +29,27 @@ export default class extends React.Component {
 					</td>
 					<td>{edge.node.frontmatter.type}</td>
 					<td>{edge.node.fields.slug}</td>
-					<td>{edge.node.frontmatter.seo_title}</td>
-					<td>{edge.node.frontmatter.seo_description}</td>
+					<td>
+						{edge.node.frontmatter.seo_title} | -
+						{edge.node.frontmatter.seo_title &&
+							edge.node.frontmatter.seo_title.length}
+						|
+						{edge.node.frontmatter.seo_title &&
+						edge.node.frontmatter.seo_title.length > 160
+							? 'bad'
+							: 'good'}{' '}
+						<hr />
+						{edge.node.frontmatter.seo_description}
+						{edge.node.frontmatter.seo_description &&
+							edge.node.frontmatter.seo_description
+								.length}
+						{edge.node.frontmatter.seo_description &&
+						edge.node.frontmatter.seo_description.length >
+							160
+							? 'bad'
+							: 'good'}
+					</td>
+					{/* <td>{edge.node.frontmatter.seo_description}</td> */}
 					<td>{edge.node.frontmatter.language}</td>
 					<td>{edge.node.frontmatter.date}</td>
 					<td>{edge.node.frontmatter.tags}</td>
@@ -54,7 +73,7 @@ export default class extends React.Component {
 					<th>type</th>
 					<th>slug</th>
 					<th>seo_title</th>
-					<th>seo_description</th>
+					{/* <th>seo_description</th> */}
 					<th>language</th>
 					<th>date</th>
 					<th>tags</th>
